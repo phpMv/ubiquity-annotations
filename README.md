@@ -1,2 +1,2 @@
 # ubiquity-annotations
-php 8 attributes for Ubiquity framework
+php annotations for Ubiquity framework with mindplay/php-annotations
