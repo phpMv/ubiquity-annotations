@@ -30,11 +30,6 @@ use BaseAnnotationTrait;
 		}
 	}
 
-	protected function asAnnotation() {
-		$fields = $this->getPropertiesAndValues ();
-		return UArray::asPhpArray ( $fields );
-	}
-
 	public function __toString() {
 		$extsStr = $this->asAnnotation ();
 		$className = (new \ReflectionClass( $this ))->getShortName();
