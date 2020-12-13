@@ -5,7 +5,7 @@ use mindplay\annotations\AnnotationCache;
 use mindplay\annotations\AnnotationManager;
 use mindplay\annotations\Annotations;
 
-class AnnotationsEngine implements AnnotationsInterface {
+class AnnotationsEngine implements AnnotationsEngineInterface {
 
 	/**
 	 *

@@ -3,6 +3,7 @@ namespace Ubiquity\annotations\items;
 
 use mindplay\annotations\Annotation;
 use Ubiquity\annotations\BaseAnnotationTrait;
+use Ubiquity\utils\base\UArray;
 
 /**
  * Base class for annotations.
@@ -30,7 +31,8 @@ use BaseAnnotationTrait;
 	}
 
 	protected function asAnnotation() {
-		return $this->asPhpArray ();
+		$fields = $this->getPropertiesAndValues ();
+		return UArray::asPhpArray ( $fields );
 	}
 
 	public function __toString() {
