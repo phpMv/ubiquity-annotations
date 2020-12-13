@@ -1,5 +1,5 @@
 <?php
-namespace Ubiquity\annotations\php\attributes;
+namespace Ubiquity\annotations\php;
 
 use Ubiquity\annotations\AnnotationsInterface;
 use Ubiquity\annotations\php\attributes\router\Id;
