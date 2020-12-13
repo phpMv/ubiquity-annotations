@@ -1,11 +1,10 @@
 <?php
-namespace Ubiquity\annotations\php\attributes\router;
+namespace Ubiquity\annotations\php\attributes;
 
 use Attribute;
 use Ubiquity\annotations\BaseAnnotationTrait;
 use Ubiquity\annotations\php\attributes\BaseAttribute;
 
-# [Attribute(Attribute::TARGET_PROPERTY)]
 /**
  * Annotation Id.
  * usage : #[Id]
@@ -17,6 +16,7 @@ use Ubiquity\annotations\php\attributes\BaseAttribute;
  * @version 1.0.0
  *
  */
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class Id extends BaseAttribute {
 	use BaseAnnotationTrait;
 }

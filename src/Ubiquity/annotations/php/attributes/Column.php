@@ -4,7 +4,6 @@ namespace Ubiquity\annotations\php\attributes;
 use Ubiquity\annotations\BaseAnnotationTrait;
 use Attribute;
 
-# [Attribute(Attribute::TARGET_PROPERTY)]
 /**
  * Annotation Column.
  * usages :
@@ -20,6 +19,7 @@ use Attribute;
  * @version 1.0.0
  *
  */
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class Column extends BaseAttribute {
 	use BaseAnnotationTrait;
 

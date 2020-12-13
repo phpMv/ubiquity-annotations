@@ -16,6 +16,7 @@ use Ubiquity\annotations\BaseAnnotationTrait;
  * @version 1.0.0
  *
  */
+#[Attribute(Attribute::TARGET_CLASS)]
 class Database extends BaseAttribute {
 	use BaseAnnotationTrait;
 
