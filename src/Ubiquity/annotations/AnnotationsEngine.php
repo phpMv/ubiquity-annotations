@@ -64,23 +64,25 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 		$annotationManager->registry = \array_merge($annotationManager->registry, $this->registry);
 	}
 
-	public function getAnnotsOfClass(string $class, string $annotationType = null): array {
-		return Annotations::ofClass($class, $annotationType);
+	public function getAnnotsOfClass(string $class, ?string $annotationType = null): array {
+		return Annotations::ofClass($class, $this->getAnnotationByKey($annotationType));
 	}
 
-	public function getAnnotationByKey(string $key): ?string {
-		if (\array_key_exists($key, $this->registry)) {
-			return '@' . $key;
+	public function getAnnotationByKey(?string $key=null): ?string {
+		if($key!==null){
+			if (\array_key_exists($key, $this->registry)) {
+				return '@' . \ltrim($key,'@');
+			}
 		}
 		return null;
 	}
 
-	public function getAnnotsOfProperty(string $class, string $property, string $annotationType = null): array {
-		return Annotations::ofProperty($class, $property, $annotationType);
+	public function getAnnotsOfProperty(string $class, string $property, ?string $annotationType = null): array {
+		return Annotations::ofProperty($class, $property, $this->getAnnotationByKey($annotationType));
 	}
 
-	public function getAnnotsOfMethod(string $class, string $method, string $annotationType = null): array {
-		return Annotations::ofMethod($class, $method, $annotationType);
+	public function getAnnotsOfMethod(string $class, string $method, ?string $annotationType = null): array {
+		return Annotations::ofMethod($class, $method, $this->getAnnotationByKey($annotationType));
 	}
 }
 
