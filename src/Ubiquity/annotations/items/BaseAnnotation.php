@@ -30,15 +30,15 @@ use BaseAnnotationTrait;
 		}
 	}
 	
-	protected function asAnnotation() {
-		$fields = $this->getPropertiesAndValues ();
-		return UArray::asPhpArray ( $fields );
+	public function asAnnotation() {
+		return "/**\n * ".$this."\n */";
 	}
 
 	public function __toString() {
-		$extsStr = $this->asAnnotation ();
+		$fields = $this->getPropertiesAndValues ();
+		$extsStr = UArray::asPhpArray ( $fields );
 		$className = (new \ReflectionClass( $this ))->getShortName();
 		$annotName = \substr ( $className, 0, \strlen ( $className ) - \strlen ( "Annotation" ) );
-		return "@" . \lcfirst ( $annotName ) . $extsStr;
+		return '@' . \lcfirst ( $annotName ) . $extsStr;
 	}
 }

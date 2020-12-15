@@ -11,10 +11,10 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 	 *
 	 * @var array array of annotations name/class
 	 */
-	protected $registry;
+	protected static $registry;
 
 	public function start(string $cacheDirectory): void {
-		$this->registry = [
+		self::$registry = [
 			'id' => 'Ubiquity\annotations\items\IdAnnotation',
 			'manyToOne' => 'Ubiquity\annotations\items\ManyToOneAnnotation',
 			'oneToMany' => 'Ubiquity\annotations\items\OneToManyAnnotation',
@@ -55,13 +55,13 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 	public function registerAnnotations(array $nameClasses): void {
 		$annotationManager = Annotations::getManager();
 		foreach ($nameClasses as $name => $class) {
-			$this->registry[$name] = $class;
+			self::$registry[$name] = $class;
 			$annotationManager->registry[$name] = $class;
 		}
 	}
 
 	protected function register(AnnotationManager $annotationManager) {
-		$annotationManager->registry = \array_merge($annotationManager->registry, $this->registry);
+		$annotationManager->registry = \array_merge($annotationManager->registry, self::$registry);
 	}
 
 	public function getAnnotsOfClass(string $class, ?string $annotationType = null): array {
@@ -70,7 +70,7 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 
 	public function getAnnotationByKey(?string $key=null): ?string {
 		if($key!==null){
-			if (\array_key_exists($key, $this->registry)) {
+			if (\array_key_exists($key, self::$registry)) {
 				return '@' . \ltrim($key,'@');
 			}
 		}
@@ -83,6 +83,15 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 
 	public function getAnnotsOfMethod(string $class, string $method, ?string $annotationType = null): array {
 		return Annotations::ofMethod($class, $method, $this->getAnnotationByKey($annotationType));
+	}
+	
+	public static function getAnnotation(string $key,array $parameters=[]): ?object{
+		if(isset(self::$registry[$key])){
+			$classname=self::$registry[$key];
+			$reflect=new \ReflectionClass($classname);
+			return $reflect->newInstanceArgs($parameters);
+		}
+		return null;
 	}
 }
 
