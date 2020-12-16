@@ -4,6 +4,9 @@ namespace Ubiquity\annotations;
 use mindplay\annotations\AnnotationCache;
 use mindplay\annotations\AnnotationManager;
 use mindplay\annotations\Annotations;
+use Ubiquity\annotations\items\JoinColumnAnnotation;
+use Ubiquity\annotations\items\ManyToManyAnnotation;
+use Ubiquity\annotations\items\OneToManyAnnotation;
 
 class AnnotationsEngine implements AnnotationsEngineInterface {
 
@@ -101,14 +104,30 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 			\array_walk($annotations, function ($item) {
 				return $item . '';
 			});
-				if (\sizeof($annotations) > 1) {
-					$annotationsStr .= "\n{$prefix} * " . implode("\n{$prefix} * ", $annotations);
-				} else {
-					$annotationsStr .= "\n{$prefix} * " . \end($annotations);
-				}
-				$annotationsStr .= "\n{$prefix}*/";
+			if (\sizeof($annotations) > 1) {
+				$annotationsStr .= "\n{$prefix} * " . implode("\n{$prefix} * ", $annotations);
+			} else {
+				$annotationsStr .= "\n{$prefix} * " . \end($annotations);
+			}
+			$annotationsStr .= "\n{$prefix}*/";
 		}
 		return $annotationsStr;
+	}
+	
+	public static function isManyToOne(object $annotation):bool{
+		return $annotation instanceof JoinColumnAnnotation;
+	}
+	
+	public static function isMany(object $annotation):bool{
+		return ($annotation instanceof OneToManyAnnotation) || ($annotation instanceof ManyToManyAnnotation);
+	}
+	
+	public function is(string $key, object $annotation): bool {
+		$class = self::$registry[$key] ?? null;
+		if ($class !== null) {
+			return $annotation instanceof $class;
+		}
+		return false;
 	}
 }
 

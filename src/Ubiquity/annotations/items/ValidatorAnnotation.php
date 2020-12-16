@@ -15,7 +15,7 @@ use Ubiquity\utils\base\UArray;
  * - validator("type"=>"validatorType","constraints"=>[constraints])
  *
  * @author jc
- * @version 1.0.0.1
+ * @version 1.0.2
  * @category annotations
  * @usage('property'=>true, 'inherited'=>true, 'multiple'=>true)
  */
@@ -48,19 +48,6 @@ class ValidatorAnnotation extends BaseAnnotation {
 		if (! isset ( ValidatorsManager::$validatorTypes [$this->type] )) {
 			throw new \Exception ( 'This type of annotation does not exists : ' . $this->type );
 		}
-	}
-
-	public static function initializeFromModel($type, $ref = null, $constraints = []) {
-		$validator = new ValidatorAnnotation ();
-		if (! is_array ( $constraints )) {
-			$constraints = [ ];
-		}
-		if (isset ( $ref )) {
-			$constraints ["ref"] = $ref;
-		}
-		$validator->type = $type;
-		$validator->constraints = $constraints;
-		return $validator;
 	}
 
 	protected function asAnnotation() {
