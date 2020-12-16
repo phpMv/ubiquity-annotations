@@ -71,10 +71,10 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 		return Annotations::ofClass($class, $this->getAnnotationByKey($annotationType));
 	}
 
-	public function getAnnotationByKey(?string $key=null): ?string {
-		if($key!==null){
+	public function getAnnotationByKey(?string $key = null): ?string {
+		if ($key !== null) {
 			if (\array_key_exists($key, self::$registry)) {
-				return '@' . \ltrim($key,'@');
+				return '@' . \ltrim($key, '@');
 			}
 		}
 		return null;
@@ -87,41 +87,43 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 	public function getAnnotsOfMethod(string $class, string $method, ?string $annotationType = null): array {
 		return Annotations::ofMethod($class, $method, $this->getAnnotationByKey($annotationType));
 	}
-	
-	public static function getAnnotation(string $key,array $parameters=[]): ?object{
-		if(isset(self::$registry[$key])){
-			$classname=self::$registry[$key];
-			$reflect=new \ReflectionClass($classname);
+
+	public static function getAnnotation(string $key, array $parameters = []): ?object {
+		if (isset(self::$registry[$key])) {
+			$classname = self::$registry[$key];
+			$reflect = new \ReflectionClass($classname);
 			return $reflect->newInstanceArgs($parameters);
 		}
 		return null;
 	}
-	
-	public function getAnnotationsStr(array $annotations,string $prefix="\t"):string{
+
+	public function getAnnotationsStr(array $annotations, string $prefix = "\t"): string {
 		$annotationsStr = '';
-		if (sizeof($this->annotations) > 0) {
-			$annotationsStr = $prefix."/**";
+		$size = \count($this->annotations);
+		if ($size > 0) {
+			$annotationsStr = $prefix . "/**";
 			\array_walk($annotations, function ($item) {
 				return $item . '';
 			});
-			if (\sizeof($annotations) > 1) {
+			if ($size > 1) {
 				$annotationsStr .= "\n{$prefix} * " . implode("\n{$prefix} * ", $annotations);
 			} else {
 				$annotationsStr .= "\n{$prefix} * " . \end($annotations);
 			}
 			$annotationsStr .= "\n{$prefix}*/";
 		}
+
 		return $annotationsStr;
 	}
-	
-	public static function isManyToOne(object $annotation):bool{
+
+	public static function isManyToOne(object $annotation): bool {
 		return $annotation instanceof JoinColumnAnnotation;
 	}
-	
-	public static function isMany(object $annotation):bool{
+
+	public static function isMany(object $annotation): bool {
 		return ($annotation instanceof OneToManyAnnotation) || ($annotation instanceof ManyToManyAnnotation);
 	}
-	
+
 	public function is(string $key, object $annotation): bool {
 		$class = self::$registry[$key] ?? null;
 		if ($class !== null) {
