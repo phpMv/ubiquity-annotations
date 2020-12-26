@@ -88,7 +88,7 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 		return Annotations::ofMethod($class, $method, $this->getAnnotationByKey($annotationType));
 	}
 
-	public function getAnnotation(object $container, string $key, array $parameters = []): ?object {
+	public function getAnnotation(?object $container, string $key, array $parameters = []): ?object {
 		if (isset(self::$registry[$key])) {
 			$classname = self::$registry[$key];
 			$reflect = new \ReflectionClass($classname);
@@ -131,8 +131,8 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 		}
 		return false;
 	}
-	
-	public function getUses(): array{
+
+	public function getUses(): array {
 		return [];
 	}
 }
