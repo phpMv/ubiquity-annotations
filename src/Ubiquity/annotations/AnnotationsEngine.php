@@ -135,5 +135,13 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 	public function getUses(): array {
 		return [];
 	}
+	
+	public function registerAcls():void {
+		self::registerAnnotations([
+			'allow' => \Ubiquity\annotations\items\acl\AllowAnnotation::class,
+			'resource' => \Ubiquity\annotations\items\acl\ResourceAnnotation::class,
+			'permission' => \Ubiquity\annotations\items\acl\PermissionAnnotation::class
+		]);
+	}
 }
 
