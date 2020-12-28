@@ -41,16 +41,17 @@ class ValidatorAnnotation extends BaseAnnotation {
 				}
 				unset ( $properties [1] );
 			}
-		} else {
-			throw new \Exception ( 'Validator annotation must have a type' );
 		}
 		parent::initAnnotation ( $properties );
+		if(!isset($this->type)){
+			throw new \Exception ( 'Validator annotation must have a type' );
+		}
 		if (! isset ( ValidatorsManager::$validatorTypes [$this->type] )) {
 			throw new \Exception ( 'This type of annotation does not exists : ' . $this->type );
 		}
 	}
 
-	protected function asAnnotation() {
+	public function asAnnotation() {
 		$fields = $this->getPropertiesAndValues ();
 		$result = [ ];
 		$result [] = $fields ['type'];
