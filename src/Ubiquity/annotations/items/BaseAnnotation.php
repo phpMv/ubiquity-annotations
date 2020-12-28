@@ -15,8 +15,8 @@ use BaseAnnotationTrait;
 
 	public function initAnnotation(array $properties) {
 		foreach ( $properties as $name => $value ) {
-			if (is_array ( $this->$name )) {
-				if (is_array ( $value )) {
+			if (\is_array ( $this->$name )) {
+				if (\is_array ( $value )) {
 					foreach ( $value as $k => $v ) {
 						$this->$name [$k] = $v;
 					}
