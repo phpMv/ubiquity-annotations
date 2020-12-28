@@ -19,7 +19,6 @@ class ColumnAnnotation extends BaseAnnotation {
 	public $nullable = false;
 
 	public $dbType;
-
 	/**
 	 * Initialize the annotation.
 	 */

@@ -1,12 +1,12 @@
 <?php
 namespace Ubiquity\annotations;
 
-use mindplay\annotations\AnnotationCache;
-use mindplay\annotations\AnnotationManager;
-use mindplay\annotations\Annotations;
 use Ubiquity\annotations\items\JoinColumnAnnotation;
 use Ubiquity\annotations\items\ManyToManyAnnotation;
 use Ubiquity\annotations\items\OneToManyAnnotation;
+use mindplay\annotations\AnnotationCache;
+use mindplay\annotations\AnnotationManager;
+use mindplay\annotations\Annotations;
 
 class AnnotationsEngine implements AnnotationsEngineInterface {
 
@@ -91,15 +91,16 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 	public function getAnnotation(?object $container, string $key, array $parameters = []): ?object {
 		if (isset(self::$registry[$key])) {
 			$classname = self::$registry[$key];
-			$reflect = new \ReflectionClass($classname);
-			return $reflect->newInstanceArgs($parameters);
+			$annot = new $classname();
+			$annot->initAnnotation($parameters);
+			return $annot;
 		}
 		return null;
 	}
 
 	public function getAnnotationsStr(array $annotations, string $prefix = "\t"): string {
 		$annotationsStr = '';
-		$size = \count($this->annotations);
+		$size = \count($annotations);
 		if ($size > 0) {
 			$annotationsStr = $prefix . "/**";
 			\array_walk($annotations, function ($item) {
@@ -110,7 +111,7 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 			} else {
 				$annotationsStr .= "\n{$prefix} * " . \end($annotations);
 			}
-			$annotationsStr .= "\n{$prefix}*/";
+			$annotationsStr .= "\n{$prefix} */";
 		}
 
 		return $annotationsStr;

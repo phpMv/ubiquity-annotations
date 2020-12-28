@@ -14,7 +14,6 @@ class BaseAnnotation extends Annotation {
 use BaseAnnotationTrait;
 
 	public function initAnnotation(array $properties) {
-		
 		foreach ( $properties as $name => $value ) {
 			if (is_array ( $this->$name )) {
 				if (is_array ( $value )) {
@@ -28,6 +27,11 @@ use BaseAnnotationTrait;
 				$this->$name = $value;
 			}
 		}
+	}
+	
+	protected function getDefaultParameters():array{
+		$r=new \ReflectionClass($this);
+		return $r->getDefaultProperties();
 	}
 	
 	public function asAnnotation() {
