@@ -11,6 +11,7 @@ use Ubiquity\annotations\items\BaseAnnotation;
  * - permission("permissionName","permissionLevel")
  * - permission("name"=>"permissionName")
  * - permission("name"=>"permissionName","level"=>"permissionLevel")
+ * - permission(permissionLevel)
  *
  * @author jc
  * @version 1.0.0
