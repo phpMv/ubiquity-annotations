@@ -124,6 +124,14 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 	public static function isMany(object $annotation): bool {
 		return ($annotation instanceof OneToManyAnnotation) || ($annotation instanceof ManyToManyAnnotation);
 	}
+	
+	public static function isOneToMany(object $annotation):bool{
+	    return $annotation instanceof OneToManyAnnotation;
+	}
+	
+	public static function isManyToMany(object $annotation):bool{
+	    return $annotation instanceof ManyToManyAnnotation;
+	}
 
 	public function is(string $key, object $annotation): bool {
 		$class = self::$registry[$key] ?? null;
