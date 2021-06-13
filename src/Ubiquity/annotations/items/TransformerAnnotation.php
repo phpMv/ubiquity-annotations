@@ -29,4 +29,8 @@ class TransformerAnnotation extends BaseAnnotation {
 			throw new \Exception('Transformer annotation must have a name');
 		}
 	}
+	
+	public function isSameAs($annot): bool {
+	    return \get_class($annot) === TransformerAnnotation::class && $this->name == $annot->name;
+	}
 }
