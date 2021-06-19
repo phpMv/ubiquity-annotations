@@ -10,10 +10,11 @@ namespace Ubiquity\annotations\items;
  * - manyToMany("targetEntity"=>"classname","inversedBy"=>"memberName","mappedBy"=>"memberName")
  *
  * @author jc
- * @version 1.0.2
+ * @version 1.0.3
  */
 class ManyToManyAnnotation extends BaseAnnotation {
 	public $targetEntity;
 	public $inversedBy;
 	public $mappedBy;
+	public $cascade;
 }
