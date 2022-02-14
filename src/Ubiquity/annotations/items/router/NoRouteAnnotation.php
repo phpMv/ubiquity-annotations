@@ -7,7 +7,7 @@ namespace Ubiquity\annotations\items;
  *
  * @author jc
  * @version 1.0.0
- * @usage('property'=>true, 'inherited'=>true)
+ * @usage('method'=>true, 'inherited'=>true)
  */
 class NoRouteAnnotation extends BaseAnnotation {
 }
