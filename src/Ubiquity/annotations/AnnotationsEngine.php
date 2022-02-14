@@ -44,6 +44,7 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 			'deleteMapping' => 'Ubiquity\annotations\items\router\DeleteAnnotation',
 			'options' => 'Ubiquity\annotations\items\router\OptionsAnnotation',
 			'optionsMapping' => 'Ubiquity\annotations\items\router\OptionsAnnotation',
+			'noRoute' => 'Ubiquity\annotations\items\router\NoRoute',
 			'var' => 'mindplay\annotations\standard\VarAnnotation',
 			'yuml' => 'Ubiquity\annotations\items\YumlAnnotation',
 			'rest' => 'Ubiquity\annotations\items\rest\RestAnnotation',
@@ -124,13 +125,13 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 	public static function isMany(object $annotation): bool {
 		return ($annotation instanceof OneToManyAnnotation) || ($annotation instanceof ManyToManyAnnotation);
 	}
-	
-	public static function isOneToMany(object $annotation):bool{
-	    return $annotation instanceof OneToManyAnnotation;
+
+	public static function isOneToMany(object $annotation): bool {
+		return $annotation instanceof OneToManyAnnotation;
 	}
-	
-	public static function isManyToMany(object $annotation):bool{
-	    return $annotation instanceof ManyToManyAnnotation;
+
+	public static function isManyToMany(object $annotation): bool {
+		return $annotation instanceof ManyToManyAnnotation;
 	}
 
 	public function is(string $key, object $annotation): bool {
@@ -144,8 +145,8 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 	public function getUses(): array {
 		return [];
 	}
-	
-	public function registerAcls():void {
+
+	public function registerAcls(): void {
 		self::registerAnnotations([
 			'allow' => \Ubiquity\annotations\items\acl\AllowAnnotation::class,
 			'resource' => \Ubiquity\annotations\items\acl\ResourceAnnotation::class,
