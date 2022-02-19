@@ -44,7 +44,7 @@ class AnnotationsEngine implements AnnotationsEngineInterface {
 			'deleteMapping' => 'Ubiquity\annotations\items\router\DeleteAnnotation',
 			'options' => 'Ubiquity\annotations\items\router\OptionsAnnotation',
 			'optionsMapping' => 'Ubiquity\annotations\items\router\OptionsAnnotation',
-			'noRoute' => 'Ubiquity\annotations\items\router\NoRoute',
+			'noRoute' => 'Ubiquity\annotations\items\router\NoRouteAnnotation',
 			'var' => 'mindplay\annotations\standard\VarAnnotation',
 			'yuml' => 'Ubiquity\annotations\items\YumlAnnotation',
 			'rest' => 'Ubiquity\annotations\items\rest\RestAnnotation',
