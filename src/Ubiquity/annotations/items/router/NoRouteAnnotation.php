@@ -1,6 +1,8 @@
 <?php
 namespace Ubiquity\annotations\items\router;
 
+use Ubiquity\annotations\items\BaseAnnotation;
+
 /**
  * Annotation NoRoute.
  * usage : noRoute
